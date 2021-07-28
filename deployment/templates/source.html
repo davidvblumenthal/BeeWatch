@@ -1,0 +1,89 @@
+{% extends "./nav.html" %}
+
+{% block title %}
+Source
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Select file and choose method of detection</h1>
+        <p class="lead">Select a file to infer on</p>
+      </div>
+            <form class="form-inline" method='POST' action="{{ url_for('source_selected') }}">
+                <div class="text-center">
+                    <select name="file_select" class="selectpicker form-control">
+                        {% for each in file_list %}
+                            <option value="{{each}}">{{each}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <hr/>
+                <p class="lead">Detection method</p>
+                <div class="text-center">
+                        <select name="detection_select" class="selectpicker form-control">
+                        {% for each in detection_list %}
+                            <option value="{{each}}">{{each}}</option>
+                        {% endfor %}
+                        </select>
+                <hr/>
+                        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+            </form>
+        <div>
+            <p class="lead">Options</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Option</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Select file</th>
+              <td>the file needs to be in the data folder. It can only be a .mp4, .avi, .jpg or .png.</td>
+            </tr>
+            <tr>
+              <th scope="row">Object detection</th>
+              <td>Save the image or video of the Yolo detection in runs. Detection needs to run through.</td>
+            </tr>
+            <tr>
+              <th scope="row">Blob detection</th>
+              <td>Save a txt-file for every image if there is a detection.</td>
+            </tr>
+            <tr>
+              <th scope="row">Blob corrected by Objection Detection</th>
+              <td>Choose the threshold for the bounding boxes in Yolo.</td>
+            </tr>
+            <tr>
+              <th scope="row">Blob and Objection Detection</th>
+              <td>Choose the threshold for the bounding boxes in Yolo.</td>
+             </tr>
+          </tbody>
+        </table>
+        </div>
+    </div><!-- /.container -->
+{% endblock %}
+
+
+{% block scripts %}
+{{super()}}
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+<script>
+    var slider = document.getElementById("confThres");
+    var output = document.getElementById("maxconf");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+</script>
+{% endblock %}
