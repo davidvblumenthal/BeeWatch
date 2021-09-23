@@ -666,7 +666,7 @@ Compared to the other methods blob detection and object detection uses every det
 This tracker can be found in blob_det_add_tracker_centroid.py.
 
 ## <a name='Comparingthemethods'></a> Comparing the methods
-(Oliver)
+
 The comparison between the methods can be seen in [video](https://www.youtube.com/watch?v=nTc-nwEKkl8). On the top left, object detection is used, on the top right only blob detections (with background subtraction), on the bottom left blob detection with object detection as a corrector and on the bottom right blob detection and object detection. All the methods have the same settings and use the same centroid tracker (threshold 150, disapperance maximum 5).
 
 The sum of individual bees over the whole video is 19, object detection finds 37, blob detection a total of 45, blob detection with object detection as a corrector finds 29 and blob detection and object detection 48 bees. 
